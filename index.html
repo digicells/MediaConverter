@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image and Document Converter</title>
+ <!-- this code is for bootsrap styling  -->
+        <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<!-- the bootstrap sdn code eds here  -->
+   <style>
+                @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+        
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+    
+
+        body {
+            background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
+        }
+
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 30px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            padding: 30px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            border-radius: 10px;
+        }
+
+        .file-upload-form {
+            width: fit-content;
+            height: fit-content;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .file-upload-label input {
+            display: none;
+        }
+
+        .file-upload-label {
+            cursor: pointer;
+            padding: 20px 40px;
+            border-radius: 10px;
+            border: 2px dashed rgb(243, 139, 139);
+            margin-top: 15px;
+        }
+
+        .file-upload-design {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .browse-button, button {
+            background-color: #fa4d56;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: white;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .browse-button:hover, button:hover {
+            background-color: #de151f;
+        }
+
+        .result {
+            margin-top: 15px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .result > img {
+            width: 400px;
+            margin-bottom: 15px;
+        }
+
+        select {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+        }
+
+   </style>
+</head>
+<body>
+    
+    <div class="main">
+
+        <div class="container">
+            <h1>Image and Document Converter</h1>
+
+            <!-- Image Upload and Conversion Form -->
+            <h2>Convert Image Files</h2>
+            <p>Convert any image to JPG, PNG, JFIF, GIF, JPEG, SVG, PSD, PDF, or WEBP.</p>
+            <form class="file-upload-form" method="post" enctype="multipart/form-data" action="convert.php">
+                <label for="file" class="file-upload-label">
+                    <div class="file-upload-design">
+                        <!-- <p>Image File Upload</p> -->
+
+                            <!-- this code for the uploading button  -->
+                            <div class="file btn btn-lg btn-primary">
+                                Upload image
+                                <input type="file" name="file"/>
+                                </div>
+                            <!-- btn code ends here -->
+
+                        <input id="file" type="file" name="file" required>
+                        <select name="target_format">
+                            <option value="jpg">JPG</option>
+                            <option value="png">PNG</option>
+                            <option value="jfif">JFIF</option>
+                            <option value="gif">GIF</option>
+                            <option value="jpeg">JPEG</option>
+                            <option value="svg">SVG</option>
+                            <option value="psd">PSD</option>
+                            <option value="pdf">PDF</option>
+                            <option value="webp">WEBP</option>
+                        </select>
+                        <button type="submit">Convert Image</button>
+                    </div>
+                </label>
+            </form>
+
+            <!-- Document Upload and Conversion Form -->
+            <h2>Convert Document Files</h2>
+            <p>Convert PDF, DOC, HTML, CSV, TXT, or RTF files to different formats.</p>
+<form class="file-upload-form" method="post" enctype="multipart/form-data" action="convert_documents.php">
+    <label for="docFile" class="file-upload-label">
+        <div class="file-upload-design">
+            <!-- <p>Document File Upload</p> -->
+             <!-- <p>Image File Upload</p> -->
+
+                            <!-- this code for the uploading button  -->
+                            <div class="file btn btn-lg btn-primary">
+                                Upload Document
+                                <input type="file" name="file"/>
+                                </div>
+                            <!-- btn code ends here -->
+            <input id="docFile" type="file" name="docFile" required>
+            <select name="target_format" required>
+                <option value="csv">CSV</option>
+                <option value="txt">TXT</option>
+                <option value="pdf">PDF</option>
+                <option value="doc">DOC/DOCX</option>
+            </select>
+            <button type="submit">Convert Document</button>
+        </div>
+    </label>
+</form>
+
+
+            <div class="result" id="result"></div>
+        </div>
+
+    </div>
+
+</body>
+</html>
